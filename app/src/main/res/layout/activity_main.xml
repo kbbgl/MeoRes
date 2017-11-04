@@ -12,6 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <Button
+        android:id="@+id/new_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:textSize="40sp"
+        android:background="@color/colorAccent"
+        app:layout_anchor="@id/events_list"
+        app:layout_anchorGravity="right|bottom|end"
+        android:layout_margin="16dp"/>
+
     <!--
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
