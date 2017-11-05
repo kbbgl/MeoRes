@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
+    android:background="#fff"
+    android:gravity="center"
     tools:context="com.inc.kobbigal.meores.EventDetailActivity">
 
     <TableRow>
@@ -11,16 +13,22 @@
         <ImageButton
             android:id="@+id/choose_location_btn"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"
             android:layout_weight="1"
+            android:background="#fff"
             android:scaleType="fitCenter"
-            android:src="@drawable/location" />
+            android:src="@drawable/location"
+            tools:ignore="ContentDescription" />
 
         <ImageButton
             android:id="@+id/choose_time_btn"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"
             android:layout_weight="1"
+            android:background="#fff"
+            android:contentDescription="TODO"
             android:scaleType="fitCenter"
             android:src="@drawable/calendar" />
 
@@ -31,16 +39,22 @@
         <ImageButton
             android:id="@+id/choose_tasks_btn"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"
             android:layout_weight="1"
+            android:background="#fff"
+            android:contentDescription="TODO"
             android:scaleType="fitCenter"
-            android:src="@drawable/tasks" />
+            android:src="@drawable/tasks"
+            tools:ignore="ContentDescription" />
 
         <ImageButton
             android:id="@+id/choose_attendees_btn"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"
             android:layout_weight="1"
+            android:background="#fff"
             android:scaleType="fitCenter"
             android:src="@drawable/attendees" />
     </TableRow>
