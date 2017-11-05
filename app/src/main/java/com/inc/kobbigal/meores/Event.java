@@ -1,9 +1,5 @@
 package com.inc.kobbigal.meores;
 
-import android.location.Location;
-
-import java.util.Calendar;
-
 /**
  * Created by Kobbi.Gal on 04/11/2017.
  */
@@ -13,11 +9,22 @@ public class Event {
     private int id;
     private String name;
     private String location;
-    private String datetime;
+    private String date;
+    private String time;
     private int numberOfAttendees;
     private int statusId;
 
     public Event() {
+    }
+
+    public Event(int id, String name, String location, String date, String time, int numberOfAttendees, int statusId) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+        this.date = date;
+        this.time = time;
+        this.numberOfAttendees = numberOfAttendees;
+        this.statusId = statusId;
     }
 
     public int getId() {
@@ -44,14 +51,6 @@ public class Event {
         this.location = location;
     }
 
-    public String getDatetime() {
-        return datetime;
-    }
-
-    public void setDatetime(String datetime) {
-        this.datetime = datetime;
-    }
-
     public int getNumberOfAttendees() {
         return numberOfAttendees;
     }
@@ -66,6 +65,22 @@ public class Event {
 
     public void setStatusId(int statusId) {
         this.statusId = statusId;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
     //private int totalCost;
 

@@ -1,18 +1,13 @@
 package com.inc.kobbigal.meores;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -66,9 +61,14 @@ public class EventAdapter extends BaseAdapter implements View.OnClickListener {
         TextView eventDate = view.findViewById(R.id.event_date);
         Button edit = view.findViewById(R.id.edit_event);
 
-        statusBar.setBackgroundColor();
+//        statusBar.setBackgroundColor();
         eventTitle.setText(event.getName());
-        eventLocation.setText((CharSequence) event.getLocation());
-        eventTime.setText(event.getDatetime().getTime());
+        eventLocation.setText(event.getLocation());
+        eventTime.setText(event.getTime());
+        eventDate.setText(event.getDate());
+
+        edit.setOnClickListener(this);
+
+        return view;
     }
 }
