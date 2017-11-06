@@ -5,18 +5,21 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import java.util.Calendar;
-import java.util.Date;
 
 public class EventDetailActivity extends AppCompatActivity {
 
     ImageButton datetimeBtn;
-    Date selectedDatetime;
+    Button submitEvent;
+    DatePickerDialog datePickerDialog;
+    TimePickerDialog tpd;
+    EditText event_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,8 @@ public class EventDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_event_detail);
 
         datetimeBtn = findViewById(R.id.choose_time_btn);
+        event_title = findViewById(R.id.event_title_et);
+        submitEvent = findViewById(R.id.submit_event_details_btn);
 
         datetimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,10 +36,10 @@ public class EventDetailActivity extends AppCompatActivity {
 
                 final Calendar calendar = Calendar.getInstance();
                 int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH) + 1;
+                int month = calendar.get(Calendar.MONTH);
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(EventDetailActivity.this,
+                datePickerDialog = new DatePickerDialog(EventDetailActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker datePicker, final int yearSelected, final int monthSelected, final int daySeleected) {
@@ -42,18 +47,21 @@ public class EventDetailActivity extends AppCompatActivity {
                                 int hour = calendar.get(Calendar.HOUR);
                                 int minutes = calendar.get(Calendar.MINUTE);
 
-                                TimePickerDialog tpd = new TimePickerDialog(EventDetailActivity.this,
+                                tpd = new TimePickerDialog(EventDetailActivity.this,
                                         new TimePickerDialog.OnTimeSetListener() {
                                             @Override
                                             public void onTimeSet(TimePicker timePicker, int hourSelected, int minuteSelected) {
 
                                                 Calendar selectedTimestamp = Calendar.getInstance();
-                                                //set causes null pointer
-                                                selectedTimestamp.set(yearSelected, monthSelected, daySeleected, hourSelected, minuteSelected);
-//                                                long epoch = new java.text.SimpleDateFormat("MM/dd/yyyy HH:mm:ss").parse("01/01/1970 01:00:00").getTime() / 1000;
-                                                selectedDatetime.setTime(selectedTimestamp.getTimeInMillis());
 
-                                                Toast.makeText(EventDetailActivity.this, "unixtime:" + selectedTimestamp.toString(), Toast.LENGTH_SHORT).show();
+                                                selectedTimestamp.set(Calendar.YEAR, yearSelected);
+                                                selectedTimestamp.set(Calendar.MONTH, monthSelected);
+                                                selectedTimestamp.set(Calendar.DAY_OF_MONTH, daySeleected);
+                                                selectedTimestamp.set(Calendar.HOUR, hourSelected);
+                                                selectedTimestamp.set(Calendar.MINUTE, minuteSelected);
+
+                                                long epoch = selectedTimestamp.getTimeInMillis() / 1000;
+                                                System.out.println(epoch);
                                             }
                                         }, hour, minutes, true);
                                 tpd.setTitle("Select event time");
@@ -66,5 +74,11 @@ public class EventDetailActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
 
+        datePickerDialog.dismiss();
+        tpd.dismiss();
+    }
 }
