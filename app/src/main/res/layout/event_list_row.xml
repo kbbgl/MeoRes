@@ -1,60 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
-    tools:context="com.inc.kobbigal.meores.MainActivity"
-    android:orientation="horizontal">
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="8dp"
+    app:cardUseCompatPadding="true"
+    app:contentPadding="10dp"
+    tools:context="com.inc.kobbigal.meores.MainActivity">
 
-    <View
-        android:id="@+id/status_bar"
-        android:layout_width="20dp"
-        android:layout_height="match_parent"
-        android:background="#000" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/event_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Temporary Title"
-        android:layout_margin="3dp"
-        android:textSize="20sp"
-        android:layout_toRightOf="@id/status_bar"/>
+        <View
+            android:id="@+id/status_bar"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:background="#000" />
 
-    <TextView
-        android:id="@+id/event_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Temporary location"
-        android:layout_below="@id/event_title"
-        android:layout_toRightOf="@id/status_bar"
-        android:layout_margin="5dp"
-        android:paddingRight="10dp"/>
+        <TextView
+            android:id="@+id/event_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="3dp"
+            android:text="Temporary Title"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/event_time"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="00:00"
-        android:layout_toRightOf="@id/event_date"
-        android:layout_alignBaseline="@id/event_date"/>
+        <TextView
+            android:id="@+id/event_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/event_title"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@id/status_bar"
+            android:paddingLeft="5dp"
+            android:paddingRight="10dp"
+            android:text="Temporary location" />
 
-    <TextView
-        android:id="@+id/event_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nov 30"
-        android:layout_alignBaseline="@id/event_location"
-        android:layout_toRightOf="@id/event_location"
-        android:paddingRight="10dp"/>
 
-    <Button
-        android:id="@+id/edit_event"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:text="Edit"/>
+        <TextView
+            android:id="@+id/event_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/event_location"
+            android:layout_toRightOf="@id/event_location"
+            android:paddingLeft="70dp"
+            android:paddingRight="10dp"
+            android:text="Nov 30" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/event_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/event_date"
+            android:layout_toRightOf="@id/event_date"
+            android:text="00:00" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

@@ -2,9 +2,11 @@ package com.inc.kobbigal.meores;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -20,6 +22,8 @@ public class EventDetailActivity extends AppCompatActivity {
     DatePickerDialog datePickerDialog;
     TimePickerDialog tpd;
     EditText event_title;
+    CustomAnimationListener animationListener;
+    long epoch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,20 @@ public class EventDetailActivity extends AppCompatActivity {
         datetimeBtn = findViewById(R.id.choose_time_btn);
         event_title = findViewById(R.id.event_title_et);
         submitEvent = findViewById(R.id.submit_event_details_btn);
+
+        animationListener = new CustomAnimationListener(datetimeBtn);
+
+        submitEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(EventDetailActivity.this, MainActivity.class);
+                intent.putExtra("event_time", epoch);
+                intent.putExtra("event_name", event_title.getText().toString());
+                startActivity(intent);
+
+            }
+        });
 
         datetimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +78,7 @@ public class EventDetailActivity extends AppCompatActivity {
                                                 selectedTimestamp.set(Calendar.HOUR, hourSelected);
                                                 selectedTimestamp.set(Calendar.MINUTE, minuteSelected);
 
-                                                long epoch = selectedTimestamp.getTimeInMillis() / 1000;
+                                                epoch = selectedTimestamp.getTimeInMillis() / 1000;
                                                 System.out.println(epoch);
                                             }
                                         }, hour, minutes, true);
@@ -72,13 +90,33 @@ public class EventDetailActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
 
-        datePickerDialog.dismiss();
-        tpd.dismiss();
+    public class CustomAnimationListener implements Animation.AnimationListener {
+        private ImageButton imageButton;
+
+        public CustomAnimationListener(ImageButton imageButton) {
+            this.imageButton = imageButton;
+        }
+
+        @Override
+        public void onAnimationStart(Animation animation) {
+
+            imageButton.setVisibility(View.GONE);
+
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+
+        }
+
+        @Override
+        public void onAnimationRepeat(Animation animation) {
+
+        }
     }
+
 }

@@ -1,74 +1,96 @@
 package com.inc.kobbigal.meores;
 
-import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
 
-/**
- * Created by Kobbi.Gal on 04/11/2017.
- */
+public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
 
-public class EventAdapter extends BaseAdapter implements View.OnClickListener {
+    private List<Event> events;
 
-    private List<Event> eventList;
-    private Context context;
+    private OnEventClickListener callback;
 
-    public EventAdapter(Context context, List<Event> eventList) {
-        this.eventList = eventList;
-        this.context = context;
+    EventAdapter(List<Event> events) {
+        this.events = events;
     }
 
     @Override
-    public void onClick(View view) {
+    public EventViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_list_row, parent, false);
+        return new EventViewHolder(rootView);
+    }
+
+    @Override
+    public void onBindViewHolder(EventViewHolder holder, int position) {
+
+        Event event = events.get(position);
+        holder.title.setText(event.getName());
+        holder.location.setText(event.getLocation());
+        holder.date.setText(event.getDate());
+        holder.time.setText(event.getTime());
 
     }
 
     @Override
-    public int getCount() {
-        return eventList.size();
+    public int getItemCount() {
+        return events.size();
     }
 
     @Override
-    public Object getItem(int i) {
-        return eventList.get(i);
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
     }
 
-    @Override
-    public long getItemId(int i) {
-        return 0;
+    public void setCallback(OnEventClickListener callback) {
+        this.callback = callback;
     }
 
-    @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public interface OnEventClickListener {
+        void onEventClick(int position, View view);
 
-        Event event = eventList.get(i);
+        void oneEventLongClick(int position, View view);
+    }
 
-        if (view == null){
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.event_list_row, viewGroup, false);
+    class EventViewHolder extends RecyclerView.ViewHolder {
+
+        View statusBar;
+        TextView title;
+        TextView location;
+        TextView date;
+        TextView time;
+
+        EventViewHolder(View itemView) {
+            super(itemView);
+            this.statusBar = itemView.findViewById(R.id.status_bar);
+            this.title = itemView.findViewById(R.id.event_title);
+            this.location = itemView.findViewById(R.id.event_location);
+            this.date = itemView.findViewById(R.id.event_date);
+            this.time = itemView.findViewById(R.id.event_time);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    callback.onEventClick(getAdapterPosition(), view);
+                }
+            });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+
+                    callback.oneEventLongClick(getAdapterPosition(), view);
+                    return true;
+                }
+            });
         }
 
-        View statusBar = view.findViewById(R.id.status_bar);
-        TextView eventTitle = view.findViewById(R.id.event_title);
-        TextView eventLocation = view.findViewById(R.id.event_location);
-        TextView eventTime = view.findViewById(R.id.event_time);
-        TextView eventDate = view.findViewById(R.id.event_date);
-        Button edit = view.findViewById(R.id.edit_event);
 
-//        statusBar.setBackgroundColor();
-        eventTitle.setText(event.getName());
-        eventLocation.setText(event.getLocation());
-        eventTime.setText(event.getTime());
-        eventDate.setText(event.getDate());
 
-        edit.setOnClickListener(this);
-
-        return view;
     }
+
 }
+
