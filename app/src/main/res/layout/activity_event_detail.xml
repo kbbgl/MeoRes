@@ -1,76 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:background="#fff"
-    android:gravity="center"
     tools:context="com.inc.kobbigal.meores.EventDetailActivity">
 
     <EditText
         android:id="@+id/event_title_et"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
         android:gravity="center_horizontal"
         android:hint="Enter event title" />
 
-    <TableRow>
+    <GridLayout
+        android:id="@+id/grid_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/event_title_et"
+        android:layout_centerInParent="true"
+        android:columnCount="2"
+        android:rowCount="2">
 
         <ImageButton
             android:id="@+id/choose_location_btn"
-            android:layout_width="0dp"
+            android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_margin="10dp"
-            android:layout_weight="1"
             android:background="#fff"
             android:scaleType="fitCenter"
             android:src="@drawable/location"
             tools:ignore="ContentDescription" />
 
-        <ImageButton
-            android:id="@+id/choose_time_btn"
-            android:layout_width="0dp"
-            android:layout_height="150dp"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="#fff"
-            android:contentDescription="TODO"
-            android:scaleType="fitCenter"
-            android:src="@drawable/calendar" />
+        <ViewSwitcher
+            android:id="@+id/datetime_vs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-    </TableRow>
+            <ImageButton
+                android:id="@+id/choose_time_btn"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_margin="10dp"
+                android:background="#fff"
+                android:scaleType="fitCenter"
+                android:src="@drawable/calendar" />
 
-    <TableRow>
+            <TextView
+                android:id="@+id/datetime_chosen_tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:background="#fff"
+                android:gravity="center"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+        </ViewSwitcher>
 
         <ImageButton
             android:id="@+id/choose_tasks_btn"
-            android:layout_width="0dp"
+            android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_margin="10dp"
-            android:layout_weight="1"
             android:background="#fff"
-            android:contentDescription="TODO"
             android:scaleType="fitCenter"
             android:src="@drawable/tasks"
             tools:ignore="ContentDescription" />
 
         <ImageButton
             android:id="@+id/choose_attendees_btn"
-            android:layout_width="0dp"
+            android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_margin="10dp"
-            android:layout_weight="1"
             android:background="#fff"
             android:scaleType="fitCenter"
             android:src="@drawable/attendees" />
-    </TableRow>
+    </GridLayout>
 
     <Button
         android:id="@+id/submit_event_details_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
         android:text="Submit" />
 
-</TableLayout>
+</RelativeLayout>
 

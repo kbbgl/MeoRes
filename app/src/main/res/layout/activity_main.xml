@@ -3,13 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
     tools:context="com.inc.kobbigal.meores.MainActivity">
+
+    <AutoCompleteTextView
+        android:id="@+id/autocomplete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:completionThreshold="1"
+        android:hint="Search for event" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/events_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/autocomplete" />
 
     <Button
         android:id="@+id/add_event"

@@ -7,11 +7,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.ViewSwitcher;
 
 import java.util.Calendar;
 
@@ -22,7 +25,8 @@ public class EventDetailActivity extends AppCompatActivity {
     DatePickerDialog datePickerDialog;
     TimePickerDialog tpd;
     EditText event_title;
-    CustomAnimationListener animationListener;
+    ViewSwitcher viewSwitcher;
+    TextView datetimeTv;
     long epoch;
 
     @Override
@@ -33,8 +37,13 @@ public class EventDetailActivity extends AppCompatActivity {
         datetimeBtn = findViewById(R.id.choose_time_btn);
         event_title = findViewById(R.id.event_title_et);
         submitEvent = findViewById(R.id.submit_event_details_btn);
+        viewSwitcher = findViewById(R.id.datetime_vs);
 
-        animationListener = new CustomAnimationListener(datetimeBtn);
+        final Animation in = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
+        final Animation out = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);
+
+        viewSwitcher.setOutAnimation(out);
+        viewSwitcher.setInAnimation(in);
 
         submitEvent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +69,7 @@ public class EventDetailActivity extends AppCompatActivity {
                 datePickerDialog = new DatePickerDialog(EventDetailActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
-                            public void onDateSet(DatePicker datePicker, final int yearSelected, final int monthSelected, final int daySeleected) {
+                            public void onDateSet(final DatePicker datePicker, final int yearSelected, final int monthSelected, final int daySeleected) {
 
                                 int hour = calendar.get(Calendar.HOUR);
                                 int minutes = calendar.get(Calendar.MINUTE);
@@ -79,13 +88,20 @@ public class EventDetailActivity extends AppCompatActivity {
                                                 selectedTimestamp.set(Calendar.MINUTE, minuteSelected);
 
                                                 epoch = selectedTimestamp.getTimeInMillis() / 1000;
+                                                final String datetime = daySeleected + "/" + (monthSelected + 1) + "/" + yearSelected + "\n" + hourSelected + ":" + minuteSelected;
                                                 System.out.println(epoch);
+                                                datetimeTv = (TextView) viewSwitcher.getNextView();
+                                                viewSwitcher.showNext();
+                                                datetimeTv.setText(datetime);
+
+                                                //TODO perhaps add prompt to add event to Google Calendar
                                             }
                                         }, hour, minutes, true);
                                 tpd.setTitle("Select event time");
                                 tpd.show();
                             }
                         }, year, month, day);
+                datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
                 datePickerDialog.setTitle("Select event date");
                 datePickerDialog.show();
             }
