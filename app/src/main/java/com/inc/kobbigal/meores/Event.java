@@ -17,7 +17,7 @@ public class Event {
     public Event() {
     }
 
-    public Event(int id, String name, String location, String date, String time, int numberOfAttendees, int statusId) {
+    Event(int id, String name, String location, String date, String time, int numberOfAttendees, int statusId) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -43,7 +43,7 @@ public class Event {
         this.name = name;
     }
 
-    public String getLocation() {
+    String getLocation() {
         return location;
     }
 
@@ -67,7 +67,7 @@ public class Event {
         this.statusId = statusId;
     }
 
-    public String getDate() {
+    String getDate() {
         return date;
     }
 
