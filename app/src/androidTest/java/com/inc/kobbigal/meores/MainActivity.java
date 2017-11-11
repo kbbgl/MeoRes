@@ -1,5 +1,6 @@
 package com.inc.kobbigal.meores;
 
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Event> events;
     List<String> eventNames;
     EventAdapter eventAdapter;
-    RecyclerView recyclerView;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -36,13 +36,12 @@ public class MainActivity extends AppCompatActivity {
 
                 String[] datetimeParts = datetime.split("\n");
                 String date = datetimeParts[0];
-                String time = "@" + datetimeParts[1];
+                String time = datetimeParts[1];
 
                 Event event = new Event(0, eventName, location, date, time, 0, 0);
 
                 eventNames.add(eventName);
                 events.add(event);
-                eventAdapter.notifyDataSetChanged();
 
             }
         }
@@ -54,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "database-name").build();
+        AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "database-name").build();
 
         addEventBtn = findViewById(R.id.add_event);
 
@@ -75,8 +74,8 @@ public class MainActivity extends AppCompatActivity {
         eventNamesArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, eventNames);
         autoCompleteTextView.setAdapter(eventNamesArrayAdapter);
 
-        recyclerView = findViewById(R.id.events_list);
-//        recyclerView.setHasFixedSize(true);
+        RecyclerView recyclerView = findViewById(R.id.events_list);
+        recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
@@ -135,5 +134,9 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
+//        intent.putExtra("event_time", epoch);
+//        intent.putExtra("event_name", event_title.getText().toString());
     }
 }

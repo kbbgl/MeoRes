@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">MeoRes</string>
+    <string name="temporary_title">Temporary Title</string>
+    <string name="temporary_location">Temporary location</string>
+    <string name="nov_30">Nov 30</string>
+    <string name="_00_00">00:00</string>
+    <string name="space" />
+    <string name="save">Save</string>
+    <string name="choosetimeicon">choosetimeicon</string>
+    <string name="enter_event_title">Enter event title</string>
+    <string name="choose_attendees_icon">choose attendees icon</string>
 
     <string-array name="events">
         <item>Event 0</item>

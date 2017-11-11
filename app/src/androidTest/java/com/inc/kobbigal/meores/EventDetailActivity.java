@@ -1,6 +1,5 @@
 package com.inc.kobbigal.meores;
 
-import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -42,8 +41,7 @@ public class EventDetailActivity extends AppCompatActivity {
     ViewSwitcher locationVs;
     TextView datetimeTv;
     TextView locationTv;
-    String address;
-    String datetime;
+    long epoch;
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
 
     @Override
@@ -55,9 +53,8 @@ public class EventDetailActivity extends AppCompatActivity {
 
                 locationTv = (TextView) locationVs.getNextView();
                 locationVs.showNext();
-                String fullAddress = locationTv.getText().toString() + place.getAddress().toString().replaceAll(",", "\n").trim();
-                address = place.getName().toString();
-                locationTv.setText(fullAddress);
+                String address = locationTv.getText().toString() + place.getAddress().toString().replaceAll(",", "\n").trim();
+                locationTv.setText(address);
 
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 com.google.android.gms.common.api.Status status = PlaceAutocomplete.getStatus(this, data);
@@ -100,13 +97,10 @@ public class EventDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent();
-                intent.putExtra("event_time", datetime);
+                Intent intent = new Intent(EventDetailActivity.this, MainActivity.class);
+                intent.putExtra("event_time", epoch);
                 intent.putExtra("event_name", event_title.getText().toString());
-                intent.putExtra("event_location", address);
-
-                setResult(RESULT_OK, intent);
-                finish();
+                startActivity(intent);
 
             }
         });
@@ -128,7 +122,6 @@ public class EventDetailActivity extends AppCompatActivity {
         });
 
 
-
         datetimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -140,10 +133,10 @@ public class EventDetailActivity extends AppCompatActivity {
                 datePickerDialog = new DatePickerDialog(EventDetailActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
-                            public void onDateSet(final DatePicker datePicker, final int yearSelected, final int monthSelected, final int daySelected) {
+                            public void onDateSet(final DatePicker datePicker, final int yearSelected, final int monthSelected, final int daySeleected) {
 
-                                int hour = calendar.get(Calendar.HOUR_OF_DAY);
-                                final int minutes = calendar.get(Calendar.MINUTE);
+                                int hour = calendar.get(Calendar.HOUR);
+                                int minutes = calendar.get(Calendar.MINUTE);
 
                                 tpd = new TimePickerDialog(EventDetailActivity.this,
                                         new TimePickerDialog.OnTimeSetListener() {
@@ -154,18 +147,12 @@ public class EventDetailActivity extends AppCompatActivity {
 
                                                 selectedTimestamp.set(Calendar.YEAR, yearSelected);
                                                 selectedTimestamp.set(Calendar.MONTH, monthSelected);
-                                                selectedTimestamp.set(Calendar.DAY_OF_MONTH, daySelected);
+                                                selectedTimestamp.set(Calendar.DAY_OF_MONTH, daySeleected);
                                                 selectedTimestamp.set(Calendar.HOUR, hourSelected);
                                                 selectedTimestamp.set(Calendar.MINUTE, minuteSelected);
 
-                                                if (minuteSelected < 10) {
-                                                    String minuteSelectedStr = "0" + minuteSelected;
-                                                    datetime = daySelected + "/" + (monthSelected + 1) + "/" + yearSelected + "\n" + hourSelected + ":" + minuteSelectedStr;
-                                                } else
-                                                    datetime = daySelected + "/" + (monthSelected + 1) + "/" + yearSelected + "\n" + hourSelected + ":" + minuteSelected;
-
-                                                //long epoch = selectedTimestamp.getTimeInMillis() / 1000;
-
+                                                epoch = selectedTimestamp.getTimeInMillis() / 1000;
+                                                final String datetime = daySeleected + "/" + (monthSelected + 1) + "/" + yearSelected + "\n" + hourSelected + ":" + minuteSelected;
                                                 Log.i("datetime", datetime);
                                                 datetimeTv = (TextView) datetimeVs.getNextView();
                                                 datetimeVs.showNext();
@@ -190,7 +177,6 @@ public class EventDetailActivity extends AppCompatActivity {
     public void buttonEffect(View button) {
         button.setOnTouchListener(new View.OnTouchListener() {
 
-            @SuppressLint("ClickableViewAccessibility")
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN: {
