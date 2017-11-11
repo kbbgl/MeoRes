@@ -161,8 +161,10 @@ public class EventDetailActivity extends AppCompatActivity {
                                                 if (minuteSelected < 10) {
                                                     String minuteSelectedStr = "0" + minuteSelected;
                                                     datetime = daySelected + "/" + (monthSelected + 1) + "/" + yearSelected + "\n" + hourSelected + ":" + minuteSelectedStr;
-                                                } else
+                                                } else {
                                                     datetime = daySelected + "/" + (monthSelected + 1) + "/" + yearSelected + "\n" + hourSelected + ":" + minuteSelected;
+                                                }
+
 
                                                 //long epoch = selectedTimestamp.getTimeInMillis() / 1000;
 
