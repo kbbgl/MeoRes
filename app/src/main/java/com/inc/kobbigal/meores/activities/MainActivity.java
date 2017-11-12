@@ -1,4 +1,4 @@
-package com.inc.kobbigal.meores;
+package com.inc.kobbigal.meores.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,10 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.inc.kobbigal.meores.Event;
+import com.inc.kobbigal.meores.R;
+import com.inc.kobbigal.meores.adapters.EventAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 String date = datetimeParts[0];
                 String time = "@" + datetimeParts[1];
 
-                Event event = new Event(0, eventName, location, date, time, 0, 0);
+                Event event = new Event(eventName, location, date, time, 0, 0);
 
                 eventNames.add(eventName);
                 events.add(event);
@@ -54,23 +58,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "database-name").build();
-
         addEventBtn = findViewById(R.id.add_event);
 
         AutoCompleteTextView autoCompleteTextView = findViewById(R.id.autocomplete);
         ArrayAdapter<String> eventNamesArrayAdapter;
         eventNames = new ArrayList<>();
         events = new ArrayList<>();
-
-        /*
-        for (int i = 0; i < 10; i++) {
-            events.add(new Event(i, "Event " + i,
-                    "Location " + i, "Date " + i,
-                    "Time + " + i, i, i));
-
-            eventNames.add(events.get(i).getName());
-        }*/
 
         eventNamesArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, eventNames);
         autoCompleteTextView.setAdapter(eventNamesArrayAdapter);

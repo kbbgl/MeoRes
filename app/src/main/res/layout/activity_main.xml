@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.inc.kobbigal.meores.MainActivity">
+    tools:context="com.inc.kobbigal.meores.activities.MainActivity">
 
     <AutoCompleteTextView
         android:id="@+id/autocomplete"
@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:completionThreshold="1"
-        android:hint="Search for event" />
+        android:hint="@string/search_for_event" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/events_list"
@@ -27,7 +27,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_margin="16dp"
-        android:text="+"
+        android:text="@string/plusevent"
         android:textSize="20sp"
         android:textStyle="bold" />
 

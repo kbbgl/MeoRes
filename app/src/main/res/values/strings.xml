@@ -9,6 +9,8 @@
     <string name="choosetimeicon">choosetimeicon</string>
     <string name="enter_event_title">Enter event title</string>
     <string name="choose_attendees_icon">choose attendees icon</string>
+    <string name="search_for_event">Search for event</string>
+    <string name="plusevent">+</string>
 
     <string-array name="events">
         <item>Event 0</item>

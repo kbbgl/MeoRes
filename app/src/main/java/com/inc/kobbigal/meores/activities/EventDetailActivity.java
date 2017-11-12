@@ -1,4 +1,4 @@
-package com.inc.kobbigal.meores;
+package com.inc.kobbigal.meores.activities;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -25,26 +25,27 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+import com.inc.kobbigal.meores.R;
 
 import java.util.Calendar;
 
 public class EventDetailActivity extends AppCompatActivity {
 
-    ImageButton datetimeBtn;
-    ImageButton locationBtn;
-    ImageButton tasksBtn;
-    ImageButton attendeesBtn;
-    Button submitEvent;
-    DatePickerDialog datePickerDialog;
-    TimePickerDialog tpd;
-    EditText event_title;
-    ViewSwitcher datetimeVs;
-    ViewSwitcher locationVs;
-    TextView datetimeTv;
-    TextView locationTv;
-    String address;
-    String datetime;
-    int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
+    public ImageButton datetimeBtn;
+    public ImageButton locationBtn;
+    public ImageButton tasksBtn;
+    public ImageButton attendeesBtn;
+    public Button submitEvent;
+    public DatePickerDialog datePickerDialog;
+    public TimePickerDialog tpd;
+    public EditText event_title;
+    public ViewSwitcher datetimeVs;
+    public ViewSwitcher locationVs;
+    public TextView datetimeTv;
+    public TextView locationTv;
+    public String address;
+    public String datetime;
+    public int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -116,6 +117,7 @@ public class EventDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 try {
+                    Log.i("locationBtn", "clicked");
                     Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY).build(EventDetailActivity.this);
                     startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
                 } catch (GooglePlayServicesRepairableException e) {

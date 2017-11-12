@@ -1,24 +1,40 @@
 package com.inc.kobbigal.meores;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 /**
  * Created by Kobbi.Gal on 04/11/2017.
  */
-
+@Entity(tableName = "events")
 public class Event {
 
+    @PrimaryKey(autoGenerate = true)
     private int id;
+
+    @ColumnInfo(name = "name")
     private String name;
+
+    @ColumnInfo(name = "location")
     private String location;
+
+    @ColumnInfo(name = "date")
     private String date;
+
+    @ColumnInfo(name = "time")
     private String time;
+
+    @ColumnInfo(name = "attendees")
     private int numberOfAttendees;
+
+    @ColumnInfo(name = "statusId")
     private int statusId;
 
     public Event() {
     }
 
-    Event(int id, String name, String location, String date, String time, int numberOfAttendees, int statusId) {
-        this.id = id;
+    public Event(String name, String location, String date, String time, int numberOfAttendees, int statusId) {
         this.name = name;
         this.location = location;
         this.date = date;
@@ -43,7 +59,7 @@ public class Event {
         this.name = name;
     }
 
-    String getLocation() {
+    public String getLocation() {
         return location;
     }
 
@@ -67,7 +83,7 @@ public class Event {
         this.statusId = statusId;
     }
 
-    String getDate() {
+    public String getDate() {
         return date;
     }
 

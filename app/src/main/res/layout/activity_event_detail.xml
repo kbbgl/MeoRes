@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:background="#fff"
-    tools:context="com.inc.kobbigal.meores.EventDetailActivity">
+    tools:context="com.inc.kobbigal.meores.activities.EventDetailActivity">
 
     <EditText
         android:id="@+id/event_title_et"

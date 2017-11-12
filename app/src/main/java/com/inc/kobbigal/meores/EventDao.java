@@ -22,11 +22,20 @@ public interface EventDao {
     Event findByName(String name);
 
     @Insert
-    void insertAll(Event... events);
+    void insertEvents(Event... events);
+
+    @Insert
+    void insertEvent(Event event);
 
     @Delete
-    void delete(Event event);
+    void deleteEvent(Event event);
+
+    @Delete
+    void deleteEvents(Event... events);
 
     @Update
-    void updateEvent(Event... events);
+    void updateEvent(Event event);
+
+    @Update
+    void updateEvents(Event... events);
 }

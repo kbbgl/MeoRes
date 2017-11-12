@@ -8,7 +8,7 @@
     app:cardElevation="8dp"
     app:cardUseCompatPadding="true"
     app:contentPadding="10dp"
-    tools:context="com.inc.kobbigal.meores.MainActivity">
+    tools:context="com.inc.kobbigal.meores.activities.MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

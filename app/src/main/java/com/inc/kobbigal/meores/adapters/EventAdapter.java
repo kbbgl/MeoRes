@@ -1,10 +1,13 @@
-package com.inc.kobbigal.meores;
+package com.inc.kobbigal.meores.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.inc.kobbigal.meores.Event;
+import com.inc.kobbigal.meores.R;
 
 import java.util.List;
 
@@ -14,7 +17,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
     private OnEventClickListener callback;
 
-    EventAdapter(List<Event> events) {
+    public EventAdapter(List<Event> events) {
         this.events = events;
     }
 
