@@ -1,5 +1,6 @@
 package com.inc.kobbigal.meores;
 
+import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
@@ -11,14 +12,15 @@ import java.util.List;
  * Created by Kobbi.Gal on 10/11/2017.
  */
 
+@Dao
 public interface EventDao {
-    @Query("SELECT * FROM event")
+    @Query("SELECT * FROM events")
     List<Event> getAll();
 
-    @Query("SELECT * FROM event WHERE id IN (:eventId)")
+    @Query("SELECT * FROM events WHERE id IN (:eventId)")
     List<Event> loadAllByIds(int[] eventId);
 
-    @Query("SELECT * FROM event WHERE name LIKE :name LIMIT 1")
+    @Query("SELECT * FROM events WHERE name LIKE :name LIMIT 1")
     Event findByName(String name);
 
     @Insert
